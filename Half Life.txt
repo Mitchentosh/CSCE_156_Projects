@@ -6,12 +6,12 @@ public class HalfLife {
 		// TODO Auto-generated method stub
 		
 		int atomicNumber;			//atomic number of the element
-		int years = 0;					//the number of years elapsed
+		int years = 0;				//the number of years elapsed
 		String elementName;			//the name of the element
 		String elementSymbol;		//the element symbol
 		double initialMass = 10;	//initial mass of the element
-		double finalMass = 0;
-		double h;				//the calculated half-life of the element
+		double finalMass = 0;		//final mass of the element after decay
+		double h;					//the calculated half-life of the element
 		double r = 0;				//rate of decay 
 		double c;					//part of the rate of decay equation
 		double d = -0.693;
@@ -37,17 +37,18 @@ public class HalfLife {
 		initialMass = scanner.nextDouble();
 		
 		//below, the formula for C
-		
 		c = Math.pow(Math.E,d);
+		// r = initialMass * Math.pow(c,(years/h)); 
+		r = initialMass; 
+		System.out.println("Elapsed years\t Amount");
+		System.out.println( "-" + "\t\t"+ "" + " " + r);
 		
-		r = initialMass * Math.pow(c,years);
-		
-		while (count < initialMass/2) {
-			finalMass = initialMass - r;
-			count ++;
+		while (r >= initialMass/2) {
+			years++;
+			r = initialMass * Math.pow(c,(years/h)); 
+			System.out.println( years + "\t\t" +"" + " " + r);
 		}
-		System.out.print("The element " + elementName + "" + "(" + atomicNumber + "-" + elementSymbol + ")" + "will reach it's half-life in " + count + " years, with a mass of " + finalMass + "grams.");
+		System.out.println();
+		System.out.print("The element " + elementName + "" + " (" + atomicNumber + "-" + elementSymbol + ") " + "will reach it's half-life in " + years + " years, with a mass of " + r + "grams.");
 	}
-	
-	
 }
